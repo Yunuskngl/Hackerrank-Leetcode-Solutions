@@ -1,0 +1,81 @@
+//SOLUTION1:
+
+//https://leetcode.com/problems/furthest-building-you-can-reach/description/?source=submission-noac
+
+/*
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        int k,m;
+        int templadder = ladders;
+        int tempbricks = bricks;
+        for(int i = 0; i < heights.size() - 1; i++) {
+            if(heights[i + 1] <= heights[i]) continue; 
+            if(heights[i + 1] - heights[i] <= bricks) { 
+                bricks -= heights[i + 1] - heights[i];
+            }
+            else if(ladders > 0) { 
+                ladders--;
+            }
+            else { 
+                m = i;
+                break;
+            }
+        }
+        for(int i = 0; i < heights.size() - 1; i++) {
+            if(heights[i + 1] <= heights[i]) continue; 
+            if(templadder > 0) { 
+                templadder--;
+            }
+            else if(heights[i + 1] - heights[i] <= tempbricks) { 
+                tempbricks -= heights[i + 1] - heights[i];
+            }
+            else { 
+                k  = i;
+                break;
+            }
+        }
+        if(m < k){
+            return k; 
+        }
+        else{
+            return m;
+        }
+        return heights.size() - 1;
+    }
+};
+
+*/
+
+
+//SOLUTION2:
+
+//https://leetcode.com/problems/furthest-building-you-can-reach/description/?source=submission-noac
+
+/*
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        priority_queue<int, vector<int>, greater<int>> pq;
+        
+        for (int i = 0; i < heights.size() - 1; ++i) {
+            int diff = heights[i + 1] - heights[i];
+            
+            if (diff > 0) {
+                pq.push(diff);
+                
+                if (pq.size() > ladders) {
+                    int smallest_diff = pq.top();
+                    pq.pop();
+                    bricks -= smallest_diff;
+                    
+                    if (bricks < 0) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return heights.size() - 1;
+    }
+};
+*/
